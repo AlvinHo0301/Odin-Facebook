@@ -1,0 +1,48 @@
+<li class  = "card" >
+  <header class = "card-header" >
+    <p class = "card-header-title" >
+      <%= post.title %>
+    </p>
+  </header>
+      <div class = "card-content">
+    <div class = "content" >
+        <%= post.body %>
+      </div>
+    </div>
+    <div class = "card-content" >
+      <div class = "content" >
+        Posted by: <%= link_to post.user.name, user_path(post.user), id: "name-link" %><br>
+        Posted at: <%= post.created_at.strftime("%1:%M%p %A, %B %d, %Y.") %><br>
+      Likes: <%= post.likes.count %>
+      </div>
+    </div>
+
+    <%= if post.comment.any? %>
+      <ul class = "section" >
+        <%= render post.comments.all %>
+      </ul>
+    <%= end %>
+    <%= form_for :comment, url: "/comments", method: :post do |f| %>
+        <%= f.text_field :content, placeholder: "Your comment here...", class: "input is-small left-field" %><br>
+        <%= f.hidden_field :commentable_id, value: post.id %>
+        <%= f.hidden_field :commentable_type, value: "Post" %>
+    
+    <footer class = "card-footer" >
+      <div class = "level" >
+        <div class = "level-left">
+            <%= f.submit "comment", class: "button is-small is-inof" %>
+        <%= end %>
+        <%= user_liked = false %>
+        <%= post.likes.each { |like| user_liked = true if like.user_id == current_user.id }%>
+        <%= if user_liked %>
+          <a class = "button is-small is-success" disabled>liked</a>
+        <%= else %>
+          <%= button_to "like", "/posts", params: {user_id: current_user.id, likeable_id: post.id, likeable_type: "Post"}, class: "button is small is-success" %>
+        <%= end %>
+        <%= if current_user.id  == post.user_id %>
+          <%= button_to "delete post", "/post/#{post.id}", method: :delete, class: "button is-small is-danger" %>
+        <%= end %>
+        </div>
+      </div>
+    </footer>
+  </li>

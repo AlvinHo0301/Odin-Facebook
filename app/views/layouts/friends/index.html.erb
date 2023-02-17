@@ -1,0 +1,13 @@
+<%= provide(:title, "Your Friends") %>
+<section class = "hero is-light is-bold">
+    <div class = "hero-body">
+      <h1 class = "title">Your Friends </h1>
+      <ul>
+          <%= render @friends %>
+      </ul>
+      <%= will_paginate @friends, renderer: BulmaPagination::rails %>
+      <%= if current_user.friends.count == 0 %>
+          <p class = "subtitle">Looks like you don't have any friends yet </p>
+      <%= end %>
+    </div>
+</section>

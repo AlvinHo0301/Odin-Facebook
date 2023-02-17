@@ -1,0 +1,12 @@
+<% provide(:title, "Your Requests") %>
+<section class="hero is-medium is-light is-bold">
+    <div class = "hero-body">
+        <h1 class = "title">Your Request</h1>
+        <ul>
+            <%= render @friend_request %>
+        </ul>
+        <%= unless @friend_request.any? %>
+            <p class = "subtitle">Looks like you have no request at this time.</p>
+        <%= end %>
+    </div>
+</section>

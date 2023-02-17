@@ -1,0 +1,8 @@
+<li class = "box" >
+    <div class = "subtitle">
+        <div class = "is-vertical-center">
+            <%= gravatar_for(friend) %>
+            <div class = "section">
+                <%= link_to friend.name, user(friend), id: "namelink" %> |<%= friend.email %>
+            </div>
+    </div>

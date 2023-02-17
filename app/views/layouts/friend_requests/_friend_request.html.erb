@@ -1,0 +1,18 @@
+<li class="box">
+    <div class = "subtitle" >
+        <div class = "level">
+            <span class = "level-left">
+                <div class = "level-item"><%= gravatar_for(User.find(friend_request.friend_id)) %></div>
+                <p class = "level-item"><%= User.find(friend_request.friend_id).name %></p>
+            </span>
+            <span class = "level-right">
+                <div class = "section has-text-centered">
+                    <%= button_to "delete request", friend_request_path(friend_request), method: :delete, class: "button is-danger" %>
+                </div>
+                <div class = "section has-text-centered">
+                    <%= button_to "accept request", "/users/#{current_user.id}/friends", method: :post, params: {friend_id: friend_request.friend_id }, class: "button is-succes" %>
+                </div>
+            </span>
+        </div>
+    </div>
+</li>

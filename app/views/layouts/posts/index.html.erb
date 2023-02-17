@@ -1,0 +1,11 @@
+<%= provide(title: "Newsfeed") %>
+<section class = "hero is-light is-bold" >
+    <div class = "hero-body" >
+          <h1 class = "title">Newsfeed</h1>
+          <%= render "posts/post_form" %><br><br>
+          <ul class = "section" >
+                <%= render @posts %>
+          </ul>
+          <%= will_paginate @posts, renderer: BulmaPagination::rails %>
+    </div>
+</section>

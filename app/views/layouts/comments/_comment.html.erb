@@ -1,0 +1,25 @@
+<li>
+    <div class = "message">
+      <div class = "message-body">
+        <%= comment.content %><br>
+        By <%= User.find(comment.user_id).name%> at <%= comment.created_at.strftime("%1:%M%p, %m/%d/%Y") %><br>
+        Likes: <%= comment.likes.count %>
+        <%= if comment.comment.any? %>
+            <ul>
+                <%= render comment.comments.all %>
+            </ul>
+        <%= end %>
+    <%= form_for :comment, url:"/comments", method: :post do |f| %>
+        <%= f.hidden_field :commentable_id, value: comment.id %>
+        <%= f.text_field :content, placeholder: "You reply here...", class: "Input has-addons is-info is-small left-field" %>
+        <%= f.submit "reply", class: "button is-info is-small" %>
+        <%= user_liked = false %>
+        <%=comment.likes.each {|like| user_liked = true if current_user.id == like.user_id } %>
+        <%= if user_liked %>
+          <a class = "button is-small is-succes" disable>liked</a>
+        <%= else %>
+          <%= button_to "like", "#", params: {user_id: current_user.id, likeable_id: comment.id, likeable_type: "Comment"}, class: "button is-small is-succes" %><br>
+        <%= end %>
+    <%= end %>
+  </div>
+</li>

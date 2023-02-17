@@ -1,0 +1,22 @@
+<% provide(title: "Password Reset") %>
+<section class = "hero is-light is-bold" >
+  <div class = "hero-budy" >
+          <h2 class ="title"> Forgot your password?</h2>
+
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post}) do |f| %>
+
+            <%= devise_error_messages %>
+
+            <div class = "field" >
+              <%= f.label :email, class: "label" %>
+              <%= f.email_field :email , autofocus: true, autocomplete: "email", placeholder: "e.g. alvin0301@gmail.com", class: "input is-info left-field" %>
+            </div>
+
+            <div class = "control" >
+              <%= f.submit "Send me reset password instruction ", class: "button is-info" %>
+            </div>
+          <%= end %>
+
+          <%= render "users/shared/links" %>
+  </div>
+</section>

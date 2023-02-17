@@ -1,0 +1,21 @@
+<%= provide(title:: "Confirm Resend") %>
+
+<section class = "hero is-light is-bold" >
+      <div  class = "hero-body" >
+          <h2 class = "title">Resend confirmation Instruction </h2>
+
+              <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: {method: :post}) do |f| %>
+                  <%= devise_error_messages! %>
+                <div class = "field" >
+                  <%= f.label :email, class: "label" %>
+                  <%= f.email_field :email , autofocus: true, autocomplete: "email" , placeholder: "Your Email here", 
+                  value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "input  is-info left-field " %>
+                </div>
+
+                <div class = "control" >
+                  <%= f.submit "Resend confirmation instruction" , class: "button is-info" %>
+                </div>
+              
+              <%= render "users/shared/links" %>
+      </div>
+</section>

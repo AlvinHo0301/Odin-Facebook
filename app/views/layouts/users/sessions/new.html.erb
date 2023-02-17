@@ -1,0 +1,36 @@
+<%= provide(title: "Log in") %>
+<section class = "hero is-light is-bold">
+  <div class = "hero-body" >
+    <h2 class = "title">Log in</h2>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_email)) do |f| %>
+    <div class = "field " >
+      <%= f.label :email, class: "label" %>
+      <div class = "control" >
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "e.g. alvin@gmail.com", class: "input is-info left-field" %>
+      </div>
+    </div>
+
+    <div class = "field" >
+      <%= f.label :password, class: "label" %>
+      <div class = "control" >
+        <%= f.password_field :password, autocomplete: "off", placeholder: "Your password here", class: "input is-info left-field" %>
+      </div>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class = "field" >
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class = "control" >
+      <%= f.submit "Log in", class: "button is-info" %>
+    </div>
+  <%  end %><br>
+    <%= link_to "Sign in with Facebook", user_facebook_omniauth_authroize.path, class: "button is-info" %>
+    <%= render "users/shared/links" %>
+
+  </div>
+</section>

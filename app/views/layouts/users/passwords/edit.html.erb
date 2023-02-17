@@ -1,0 +1,25 @@
+<% provide(title: "Change Password" ) %>
+<section class = "hero is-light is-bold" >
+  <div class = "hero-body">
+      <h2 class = "title" > Change your password </h2>
+
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :put}) do |f| %>
+
+        <%= devise_error_messages! %>
+
+        <%= f.hidden_field :reset_password_token %>
+
+        <div class = "field" >
+            <%= f.label :password, "New password", class: "label" %>
+            <%= f.password_field :password, autofocus: true, autocomplete: "off", placeholder: "Your password Here", class: "input is-info left-field" %> 
+        </div>
+
+        <div class = "field" >
+            <%= f.label :password_confirmation, "Confirm new password", class: "label" %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Your Password Here", class: "input is-info left-field" %>
+        </div>
+      <% end %>
+
+      <%= render "users/shared/links" %>
+  </div>
+</section>

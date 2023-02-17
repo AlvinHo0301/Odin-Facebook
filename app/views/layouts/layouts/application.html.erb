@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= render 'layout/defaults' %>
+  </head>
+
+  <body>
+    <%= render 'layouts/navbar' %>
+    <div class = "container" >
+        <%= render 'layouts/flash' %>
+        <%= yield %>
+        <%= render 'layout/footer' %>
+        <%= debug(parmas) if rails.env.development? %>
+    </div>
+  </body>
+</html>
